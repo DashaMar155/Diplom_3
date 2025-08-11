@@ -2,40 +2,40 @@ from selenium.webdriver.common.by import By
 
 class OrderFeedPageLocators:
 
-    #  Верхнее меню
+    # Верхнее меню
     CONSTRUCTOR_BUTTON = (By.XPATH, "//p[contains(text(),'Конструктор')]")
-    ORDER_FEED_BUTTON = (By.XPATH, "//p[contains(text(),'Лента Заказов')]")
+    ORDER_FEED_BUTTON = (By.XPATH, "//p[contains(text(),'Лента заказов')]")
     ACCOUNT_BUTTON = (By.XPATH, "//p[contains(text(),'Личный Кабинет')]")
-    ORDER_HISTORY_BUTTON = (By.XPATH, "//a[contains(@class, 'Account_link__2ETsJ')]")
+    ORDER_HISTORY_BUTTON = (By.XPATH, "//a[contains(@href, '/account/order-history')]")
 
-    #  Лента заказов
+    # Лента заказов
     LAST_ORDER = (
         By.XPATH,
-        "//ul[@class='OrderFeed_list__OLh59']/li[1]/a[1]/div[1]"
+        "//ul[contains(@class,'OrderFeed_list')]/li[1]//div[contains(@class,'OrderCard')]"
     )
     ORDER_IN_PROGRESS_LOCATOR = (
         By.XPATH,
-        "//ul[contains(@class, 'OrderFeed_orderList')]/li[1]"
+        "//ul[contains(@class, 'OrderFeed_orderList')]//li"
     )
     FEED_TITLE = (
         By.XPATH,
-        "//h1[contains(@class, 'text_type_main-large')]"
+        "//h1[contains(text(),'Лента заказов')]"
     )
 
-    #  Счётчики
+    # Счётчики
     TOTAL_ORDERS_COUNTER = (
         By.XPATH,
-        "//div[@class='undefined mb-15']//p[contains(@class, 'OrderFeed_number__2MbrQ')]"
+        "//p[contains(@class,'OrderFeed_number')][1]"
     )
     TODAY_COMPLETED_COUNTER = (
         By.XPATH,
-        "//p[@class='OrderFeed_number__2MbrQ text text_type_digits-large']"
+        "//section[contains(., 'Выполнено за сегодня')]//p[contains(@class,'OrderFeed_number')]"
     )
 
-    #  Детали заказа
+    # Детали заказа
     ORDER_DETAILS_CONTENT = (
         By.XPATH,
-        "//p[@class='text text_type_main-medium mb-8']"
+        "//p[contains(@class,'text_type_main-medium') and contains(text(),'Состав')]"
     )
     ORDER_ID = (
         By.XPATH,
@@ -47,27 +47,27 @@ class OrderFeedPageLocators:
     )
     ORDER_PREPARING_MESSAGE = (
         By.XPATH,
-        "//p[@class='undefined text text_type_main-small mb-2']"
+        "//p[contains(text(),'Готовится')]"
     )
     CLOSE_ORDER_DETAILS_BUTTON = (
         By.XPATH,
-        "//button[@type='button']//*[name()='svg']"
+        "//button[contains(@class,'Modal_modal__close')]"
     )
 
-    #  Модальные окна
+    # Модальные окна
     ORDER_LOADING_MODAL = (
         By.XPATH,
-        "//div[contains(@class, 'Modal_modal_opened__3ISw4')]//div[contains(@class, 'Modal_modal_overlay__x2ZCr')]"
+        "//div[contains(@class,'Modal_modal_opened')]"
     )
 
-    #  После входа
+    # После входа
     LOGIN_AFTER_LOGOUT_BURGER = (
         By.XPATH,
-        "//h1[@class='text text_type_main-large mb-5 mt-10']"
+        "//h1[contains(text(),'Соберите бургер')]"
     )
 
-    #  Кнопка оформления заказа
+    # Кнопка оформления заказа
     PLACE_AN_ORDER = (
         By.XPATH,
-        "//button[contains(@class, 'button_button_type_primary__1O7Bx')]"
+        "//button[contains(text(),'Оформить заказ')]"
     )

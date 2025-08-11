@@ -2,14 +2,14 @@ from selenium.webdriver.common.by import By
 
 class MainPageLocators:
 
-    #  Верхнее меню
+    # Верхнее меню
     CONSTRUCTOR_BUTTON = (By.XPATH, "//p[contains(text(),'Конструктор')]")
-    ORDER_FEED_BUTTON = (By.XPATH, "//p[contains(text(),'Лента Заказов')]")
+    ORDER_FEED_BUTTON = (By.XPATH, "//p[contains(text(),'Лента заказов')]")
 
-    #  Конструктор бургера
+    # Конструктор бургера
     BURGER_CONSTRUCTOR_SECTION = (
         By.XPATH,
-        "//section[@class='BurgerIngredients_ingredients__1N8v2']"
+        "//section[contains(@class,'BurgerIngredients_ingredients')]"
     )
     INGREDIENT_R2D3_BUN = (
         By.XPATH,
@@ -17,45 +17,45 @@ class MainPageLocators:
     )
     INGREDIENT_COUNTER = (
         By.XPATH,
-        "//p[@class='counter_counter__num__3nue1']"
+        "//p[contains(@class,'counter_counter__num')]"
     )
     ORDER_TARGET_TOP = (
         By.XPATH,
-        "//img[@alt='Перетяните булочку сюда (верх)']"
+        "//img[contains(@alt,'булочку сюда') and contains(@alt,'верх')]"
     )
     PLACE_AN_ORDER = (
         By.XPATH,
-        "//button[contains(@class, 'button_button_type_primary__1O7Bx')]"
+        "//button[contains(text(),'Оформить заказ')]"
     )
 
-    #  Детали ингредиента
+    # Детали ингредиента
     INGREDIENT_DETAILS_TITLE = (
         By.XPATH,
         "//h2[contains(@class, 'Modal_modal__title')]"
     )
     CLOSE_INGREDIENT_DETAILS_BUTTON = (
         By.XPATH,
-        "//section[contains(@class, 'Modal_modal_opened__3ISw4')]//button[@type='button']//*[name()='svg']//*[name()='path' and contains(@fill-rule,'evenodd')]"
+        "//section[contains(@class,'Modal_modal_opened')]//button[@type='button']//*[name()='svg']"
     )
 
-    #  Лента заказов
+    # Лента заказов
     COMPLETED_ORDERS = (
         By.XPATH,
-        "//p[contains(text(),'Готовы:')]"
+        "//p[contains(text(),'Готовы')]"
     )
     COMPLETED_ORDERS_COUNTER = (
         By.XPATH,
-        "//p[normalize-space()='153072']"
+        "//section[contains(., 'Готовы')]/p[contains(@class,'OrderFeed_number')]"
     )
     ORDER_IN_PROGRESS_LOCATOR = (
         By.XPATH,
-        "//ul[contains(@class, 'OrderFeed_orderListReady__1YFem')]//li[1]//*[contains(text(), '{0}')]"
+        "//ul[contains(@class, 'OrderFeed_orderListReady')]//li//*[contains(text(), '{0}')]"
     )
 
-    #  Успешное оформление заказа
+    # Успешное оформление заказа
     ORDER_SUCCESS_MESSAGE = (
         By.XPATH,
-        "//p[contains(@class, 'text_type_main-small') and contains(text(), 'готовится')]"
+        "//p[contains(text(),'готовится')]"
     )
 
-    OVERLAY = (By.CLASS_NAME, "Modal_modal_overlay__x2ZCr")
+    OVERLAY = (By.CLASS_NAME, "Modal_modal_overlay")
