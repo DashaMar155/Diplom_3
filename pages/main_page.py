@@ -1,0 +1,70 @@
+import allure
+import logging
+from pages.base_page import BasePage
+from locators.main_page_locators import MainPageLocators
+
+logger = logging.getLogger(__name__)
+
+class MainPage(BasePage):
+
+    # Действия
+    @allure.step("Нажимаем на кнопку 'Конструктор'")
+    def click_constructor(self):
+        self.click_to_element(MainPageLocators.CONSTRUCTOR_BUTTON)
+        logger.debug("Клик по кнопке 'Конструктор' выполнен")
+
+    @allure.step("Нажимаем на кнопку 'Лента заказов'")
+    def click_order_feed(self):
+        self.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
+        logger.debug("Клик по кнопке 'Лента заказов' выполнен")
+
+    @allure.step("Нажимаем на кнопку 'Оформить заказ'")
+    def click_place_an_order(self):
+        self.click_to_element(MainPageLocators.PLACE_AN_ORDER)
+        logger.debug("Клик по кнопке 'Оформить заказ' выполнен")
+
+    @allure.step("Открываем детали ингредиента")
+    def click_ingredient(self, ingredient_locator=MainPageLocators.INGREDIENT_R2D3_BUN):
+        """Можно передать локатор конкретного ингредиента, если нужна вариативность"""
+        self.click_to_element(ingredient_locator)
+        logger.debug(f"Открыты детали ингредиента: {ingredient_locator}")
+
+    @allure.step("Закрываем окно деталей ингредиента")
+    def close_ingredient_details(self):
+        self.click_to_element(MainPageLocators.CLOSE_INGREDIENT_DETAILS_BUTTON)
+        logger.debug("Закрыто окно деталей ингредиента")
+
+    @allure.step("Перетаскиваем ингредиент в конструктор")
+    def drag_and_drop_ingredient(self, ingredient_locator=MainPageLocators.INGREDIENT_R2D3_BUN):
+        self.drag_and_drop(ingredient_locator, MainPageLocators.ORDER_TARGET_TOP)
+        logger.debug(f"Перетаскивание ингредиента {ingredient_locator} в конструктор")
+
+    # Проверки
+    @allure.step("Проверяем, что конструктор бургеров отображается")
+    def is_burger_constructor_visible(self):
+        return self.wait_for_section_visible(MainPageLocators.BURGER_CONSTRUCTOR_SECTION)
+
+    @allure.step("Проверяем, что счётчик заказов отображается")
+    def is_order_feed_counter_visible(self):
+        return self.wait_for_section_visible(MainPageLocators.COMPLETED_ORDERS)
+
+    @allure.step("Проверяем, что окно деталей ингредиента отображается")
+    def is_ingredient_details_visible(self):
+        return self.is_element_displayed(MainPageLocators.CLOSE_INGREDIENT_DETAILS_BUTTON)
+
+    # Получение данных
+    @allure.step("Получаем значение счётчика ингредиента")
+    def get_ingredient_counter(self):
+        counter = int(self.get_text_from_element(MainPageLocators.INGREDIENT_COUNTER))
+        logger.debug(f"Счётчик ингредиента: {counter}")
+        return counter
+
+    @allure.step("Получаем сообщение об успешном оформлении заказа")
+    def get_order_success_message(self):
+        message = self.get_text_from_element(MainPageLocators.ORDER_SUCCESS_MESSAGE)
+        logger.debug(f"Сообщение об успехе: {message}")
+        return message
+
+    @allure.step("Ожидаем исчезновение overlay")
+    def wait_for_overlay_to_disappear(self, timeout=10):
+        return self.wait_for_element_invisible(MainPageLocators.OVERLAY, timeout)
